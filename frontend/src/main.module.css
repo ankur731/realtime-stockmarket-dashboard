@@ -1,0 +1,11 @@
+.tableWrapper::-webkit-scrollbar{
+display: none;
+
+}
+.tableWrapper{
+    /* height: calc(100%-45px) !important; */
+    /* overflow: hidden; */
+    /* max-height: 50vh; */
+    /* border: 1px solid red; */
+
+}
