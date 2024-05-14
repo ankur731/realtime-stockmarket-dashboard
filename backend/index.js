@@ -164,30 +164,53 @@ mongoose
     console.error("Error connecting to database:", err);
   });
 
+const cronJobs = []; // O
+  
 app.post("/liveData", async (req, res) => {
   const { symbols } = req.body;
-  const addJob = new CronJob(
+  const addJob = new CronJob( 
     "*/5 * * * *", // cronTime
     async function () {
-      console.log("You will see this message every 5 second");
+      console.log("You will see this message every 5 minute");
 
       await insertData(symbols);
-    }, // onTick
+      }, // onTick
     null, // onComplete
     true, // start
     "IST" // timeZone
-  );
+    );
+    
   const updateJob = new CronJob(
     "*/2 * * * * *", // cronTime
     async function () {
-      console.log("You will see this message every 1 second");
+      console.log("You will see this message every 2 second");
       await updateData(symbols);
     }, // onTick
     null, // onComplete
     true, // start
     "IST" // timeZone
-  );
+    );
+    
+     // Store the cron jobs with unique keys
+  cronJobs.push(addJob)
+    cronJobs.push(updateJob)
+    res.status(200).send("Server is live");
 });
+
+
+app.post("/stopLiveData", (req, res) => {
+    const { symbols } = req.body;
+    console.log("stopping------------")
+    // Iterate over the stored cron jobs and stop them
+    cronJobs.forEach((job) => {
+        console.log(job)
+      job.stop()
+      console.log(`Cron job ${job} stopped`);
+    });
+  
+    res.status(200).send("Server stopped");
+});
+  
 
 app.get("/listedStocks", async (req, res) => {
   try {

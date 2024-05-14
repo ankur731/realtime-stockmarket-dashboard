@@ -34,7 +34,7 @@ function CurrentStockCard() {
       ) : (
         <>
           <div className="w-[100%] flex  justify-between">
-            <h5 className="flex items-center gap-3 m-0 cursor-pointer text-lg font-semibold text-darkText-darkText1">
+            <h5 className="flex items-center gap-3 m-0 cursor-pointer text-lg font-semibold text-darkText-darkText1 dark:text-lightText-text1">
               <img
                 src="assets/IBM_logo.jpg"
                 className="min-w-6 min-h-6 w-6 h-6  rounded-full"
@@ -44,24 +44,24 @@ function CurrentStockCard() {
             <div className="flex gap-4">
               <RxDashboard
                 fontSize={20}
-                className="cursor-pointer text-darkText-darkText1"
+                className="cursor-pointer  dark:text-lightText-text4 text-darkText-darkText1"
               />
               <PiDotsThreeOutlineLight
                 fontSize={18}
-                className="cursor-pointer text-darkText-darkText1"
+                className="cursor-pointer  dark:text-lightText-text4 text-darkText-darkText1"
               />
               <FiEdit
                 fontSize={18}
-                className="cursor-pointer text-darkText-darkText1"
+                className="cursor-pointer  dark:text-lightText-text4 text-darkText-darkText1"
               />
             </div>
           </div>
           <div className="">
-            <p className="text-darkText-darkText1 text-sm">
+            <p className="text-darkText-darkText1 text-sm  dark:text-lightText-text3 font-semibold">
               {stockData?.symbol || "N/A"} -{" "}
               {stockData?.exchange || "N/A"}
             </p>
-            <p className="text-darkText-darkText2 text-sm mt-1">
+            <p className="text-darkText-darkText2 text-sm mt-1  dark:text-lightText-text4">
               {stockData.description || "N/A"}
             </p>
           </div>
@@ -75,7 +75,7 @@ function CurrentStockCard() {
             </h3>
           </div> */}
           <div className="flex justify-start items-start">
-  <h3 className="text-darkText-darkText0 m-0 text-[32px] font-semibold">
+  <h3 className="text-darkText-darkText0 m-0  dark:text-lightText-text1 text-[32px] font-semibold">
   {(stockData && stockData.data && stockData.data.length > 1) ?
     (<>
         {stockData.data[stockData.data.length - 1].open}

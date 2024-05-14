@@ -5,4 +5,10 @@ const useStore = create((set) => ({
   setStockData: (newData) => set({ stockData: newData }),
 }));
 
+export const themeStore = create((set) => ({
+  theme: localStorage.getItem("theme")||'dark', // Initialize as an empty object
+  setTheme: (newData) => set({ theme: newData }),
+}));
+
+
 export default useStore;
