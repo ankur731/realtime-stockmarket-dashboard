@@ -1,8 +1,10 @@
 ﻿# realtime-stockmarket-dashboard
 ## Development Mode
-Clone repo
-go to frontend directory type "npm Install" this will install all dependecies then type "npm run dev"
-go to backend directory type "npm Install" this will install all dependecies then type "npm start"
+###Clone repo
+### Frontend 
+Go to frontend directory type "npm Install" this will install all dependecies then type "npm run dev"
+### Backend 
+Go to backend directory type "npm Install" this will install all dependecies then type "npm start"
 this will start frontend  and backend server on port 5173 and 3000 respectively.
 
 
