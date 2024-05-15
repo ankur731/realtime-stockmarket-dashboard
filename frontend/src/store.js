@@ -6,7 +6,7 @@ const useStore = create((set) => ({
 }));
 
 export const themeStore = create((set) => ({
-  theme: localStorage.getItem("theme")||'dark', // Initialize as an empty object
+  theme: localStorage.getItem("theme")||'light', // Initialize as an empty object
   setTheme: (newData) => set({ theme: newData }),
 }));
 

@@ -10,7 +10,7 @@ import useStore from "../store";
 import { socket } from "../page/Home";
 import axios from "axios";
 
-function StocksTable() {
+function StocksTable({ setLoading }) {
   const { stockData, setStockData } = useStore();
   const [tableData, setTableData] = useState([]);
   const [joinedRooms, setJoinedRooms] = useState(new Set());
@@ -60,6 +60,22 @@ function StocksTable() {
     };
   }, []);
 
+  const handleSymbolClick = (symbol) => {
+    setLoading(true);
+    console.log(symbol);
+
+    socket.emit("sendData", symbol);
+    const rooms = Object.values(joinedRooms).map((item) => {
+      return item;
+    });
+
+    socket.emit("leaveRoom", rooms);
+
+    socket.emit("joinRoom", symbol);
+    
+    setJoinedRooms([symbol]);
+  };
+
   const columns = [
     {
       title: "Symbol",
@@ -72,7 +88,7 @@ function StocksTable() {
             className="min-w-6 object-cover min-h-6 w-6 h-6  rounded-full"
           />
           <p
-            onClick={() => socket.emit("sendData", text)}
+            onClick={() => handleSymbolClick(text)}
             className="text-darkText-darkText1 dark:text-lightText-text3"
           >
             {text}
@@ -85,7 +101,9 @@ function StocksTable() {
       dataIndex: "last",
       key: "last",
       render: (text) => (
-        <p className="text-darkText-darkText1  dark:text-lightText-text3 cursor-pointer">{text}</p>
+        <p className="text-darkText-darkText1  dark:text-lightText-text3 cursor-pointer">
+          {text}
+        </p>
       ),
     },
     {
@@ -109,10 +127,10 @@ function StocksTable() {
       style={{ scrollbarWidth: "none" }}
     >
       <div
-        className="w-[100%] h-[40px] bg-darkBackground-darkTile dark:bg-white  flex border-1 border-red-500 bg-[#20252b]  justify-between sticky top-0 z-1"
+        className="w-[100%] h-[40px] bg-darkBackground-darkTile dark:bg-[#f1f5f7]  flex border-1 border-red-500 bg-[#20252b]  justify-between sticky top-0 z-1"
         style={{ zIndex: "99" }}
       >
-        <h5 className="flex dark:bg-white dark:text-lightText-text1 items-center gap-1 m-0 cursor-pointer font-semibold text-darkText-darkText1">
+        <h5 className="flex dark:bg-[#f1f5f7] dark:text-lightText-text1 items-center gap-1 m-0 cursor-pointer font-semibold text-darkText-darkText1">
           Watchlist{" "}
           <GoChevronDown className="cursor-pointer  dark:text-lightText-text4 text-darkText-darkText1" />
         </h5>
